@@ -3,387 +3,190 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>La Panadería de Dai</title>
+<title>Dai_eth · Pastelería Artesanal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;500;600&family=Lora:ital@0;1&display=swap" rel="stylesheet">
-
 <style>
-  /* ─── VARIABLES ──────────────────────────────────────────────── */
-  :root {
-    --cream:    #FAF0E0;
-    --gold:     #C9956A;
-    --gold-lt:  #E8C98A;
-    --brown:    #7A4F2E;
-    --brown-dk: #4A2E15;
-    --muted:    #A07850;
-    --bg-soft:  #FDF6EC;
-    --white:    #FFFFFF;
-    --text:     #3D2B1A;
-    --text-sub: #7A6252;
-    --border:   rgba(122,79,46,0.15);
-    --shadow:   0 4px 24px rgba(122,79,46,0.10);
-    --r:        14px;
-    --r-sm:     8px;
-  }
+:root{--cream:#FAF0E0;--gold:#C9956A;--gold-lt:#E8C98A;--brown:#7A4F2E;--brown-dk:#4A2E15;--muted:#A07850;--bg-soft:#FDF6EC;--white:#FFFFFF;--text:#3D2B1A;--text-sub:#7A6252;--border:rgba(122,79,46,0.15);--shadow:0 4px 24px rgba(122,79,46,0.10);--r:14px;--r-sm:8px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--text);font-size:16px;line-height:1.7;overflow-x:hidden}
+img{display:block;width:100%;object-fit:cover}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+h1,h2,h3{font-family:'Playfair Display',serif;font-weight:400;line-height:1.25;color:var(--brown-dk)}
+h1{font-size:clamp(2.2rem,5vw,3.4rem)}
+h2{font-size:clamp(1.6rem,3.5vw,2.4rem)}
+h3{font-size:1.2rem}
 
-  /* ─── RESET & BASE ───────────────────────────────────────────── */
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'Nunito', sans-serif;
-    background: var(--cream);
-    color: var(--text);
-    font-size: 16px;
-    line-height: 1.7;
-    overflow-x: hidden;
-  }
-  img { display: block; width: 100%; object-fit: cover; }
-  a { text-decoration: none; color: inherit; }
-  ul { list-style: none; }
+/* BOTONES */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;border-radius:40px;font-family:'Nunito',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:all .22s;border:none}
+.btn-primary{background:var(--gold);color:var(--white)}
+.btn-primary:hover{background:var(--brown);transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--brown);border:1.5px solid var(--gold)}
+.btn-outline:hover{background:var(--gold);color:var(--white)}
+.btn-whatsapp{background:#25D366;color:#fff}
+.btn-whatsapp:hover{background:#1da952;transform:translateY(-1px)}
 
-  /* ─── TIPOGRAFÍA ─────────────────────────────────────────────── */
-  h1, h2, h3 { font-family: 'Playfair Display', serif; font-weight: 400; line-height: 1.25; color: var(--brown-dk); }
-  h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); }
-  h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); }
-  h3 { font-size: 1.2rem; }
-  .serif-italic { font-family: 'Lora', serif; font-style: italic; }
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,240,224,0.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 5vw;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--brown-dk);display:flex;flex-direction:column;line-height:1.1}
+.nav-logo span{font-family:'Nunito',sans-serif;font-size:0.68rem;font-weight:300;color:var(--muted);letter-spacing:.13em;text-transform:uppercase}
+.nav-links{display:flex;gap:22px;font-size:13px;font-weight:500}
+.nav-links a{color:var(--text-sub);transition:color .18s}
+.nav-links a:hover{color:var(--brown)}
+.nav-cta{display:flex;gap:10px}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}
+.hamburger span{display:block;width:24px;height:2px;background:var(--brown);border-radius:2px}
+.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:var(--cream);border-bottom:1px solid var(--border);padding:20px 5vw;z-index:99;flex-direction:column;gap:16px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-size:15px;font-weight:500;color:var(--text);padding:6px 0;border-bottom:1px solid var(--border)}
 
-  /* ─── BOTONES ────────────────────────────────────────────────── */
-  .btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 12px 26px; border-radius: 40px; font-family: 'Nunito', sans-serif;
-    font-size: 15px; font-weight: 600; cursor: pointer; transition: all .22s;
-    border: none;
-  }
-  .btn-primary {
-    background: var(--gold); color: var(--white);
-  }
-  .btn-primary:hover { background: var(--brown); transform: translateY(-1px); }
-  .btn-outline {
-    background: transparent; color: var(--brown);
-    border: 1.5px solid var(--gold);
-  }
-  .btn-outline:hover { background: var(--gold); color: var(--white); }
-  .btn-whatsapp {
-    background: #25D366; color: #fff;
-  }
-  .btn-whatsapp:hover { background: #1da952; transform: translateY(-1px); }
-  .btn-ig {
-    background: linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
-    color: #fff;
-  }
-  .btn-ig:hover { opacity: .88; transform: translateY(-1px); }
+/* SECCIONES */
+section{padding:80px 5vw}
+.section-tag{display:inline-block;font-family:'Nunito',sans-serif;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.section-title{margin-bottom:14px}
+.section-sub{color:var(--text-sub);font-size:16px;max-width:540px}
+.divider{width:48px;height:3px;background:var(--gold-lt);border-radius:2px;margin:16px 0}
 
-  /* ─── NAV ────────────────────────────────────────────────────── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(250,240,224,0.92); backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-    padding: 0 5vw;
-    display: flex; align-items: center; justify-content: space-between;
-    height: 64px;
-  }
-  .nav-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem; color: var(--brown-dk);
-    display: flex; flex-direction: column; line-height: 1.1;
-  }
-  .nav-logo span { font-family: 'Nunito', sans-serif; font-size: 0.7rem; font-weight: 300; color: var(--muted); letter-spacing: .12em; text-transform: uppercase; }
-  .nav-links { display: flex; gap: 28px; font-size: 14px; font-weight: 500; }
-  .nav-links a { color: var(--text-sub); transition: color .18s; }
-  .nav-links a:hover { color: var(--brown); }
-  .nav-cta { display: flex; gap: 10px; }
-  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-  .hamburger span { display: block; width: 24px; height: 2px; background: var(--brown); border-radius: 2px; transition: .3s; }
-  .mobile-menu { display: none; position: fixed; top: 64px; left: 0; right: 0; background: var(--cream); border-bottom: 1px solid var(--border); padding: 20px 5vw; z-index: 99; flex-direction: column; gap: 18px; }
-  .mobile-menu.open { display: flex; }
-  .mobile-menu a { font-size: 16px; font-weight: 500; color: var(--text); padding: 6px 0; border-bottom: 1px solid var(--border); }
+/* HERO */
+#inicio{min-height:100vh;padding-top:120px;padding-bottom:60px;display:flex;flex-direction:column;justify-content:center}
+.hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,149,106,0.12);border:1px solid rgba(201,149,106,0.3);border-radius:40px;padding:6px 16px;font-size:13px;color:var(--muted);margin-bottom:22px;font-weight:500}
+.hero-badge-dot{width:7px;height:7px;background:var(--gold);border-radius:50%}
+.hero-text h1{margin-bottom:18px}
+.hero-text h1 em{font-style:italic;color:var(--gold)}
+.hero-text>p{color:var(--text-sub);font-size:17px;margin-bottom:10px;max-width:420px}
+.hero-frase{font-family:'Lora',serif;font-style:italic;font-size:15px;color:var(--muted);margin-bottom:28px;max-width:420px;border-left:3px solid var(--gold-lt);padding-left:14px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.hero-img-wrap{border-radius:24px;overflow:hidden;aspect-ratio:4/5;background:var(--bg-soft);border:1px solid var(--border)}
+.hero-img-wrap img{width:100%;height:100%;object-fit:cover}
+.img-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:var(--bg-soft);color:var(--muted)}
+.img-placeholder svg{opacity:.35}
+.img-placeholder p{font-size:13px;opacity:.6;text-align:center;line-height:1.5}
 
-  /* ─── SECCIONES ──────────────────────────────────────────────── */
-  section { padding: 80px 5vw; }
-  .section-tag {
-    display: inline-block; font-family: 'Nunito', sans-serif;
-    font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 12px;
-  }
-  .section-title { margin-bottom: 14px; }
-  .section-sub { color: var(--text-sub); font-size: 16px; max-width: 540px; }
-  .divider {
-    width: 48px; height: 3px; background: var(--gold-lt);
-    border-radius: 2px; margin: 16px 0;
-  }
+/* FAVORITOS */
+#destacados{background:var(--bg-soft)}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:40px}
+.product-card{background:var(--white);border-radius:var(--r);border:1px solid var(--border);overflow:hidden;transition:transform .22s,box-shadow .22s}
+.product-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.product-img{aspect-ratio:4/3;overflow:hidden;background:var(--bg-soft)}
+.product-img img{width:100%;height:100%;object-fit:cover}
+.product-info{padding:16px}
+.product-info h3{font-size:1.05rem;margin-bottom:4px}
+.product-info p{font-size:13px;color:var(--text-sub);margin-bottom:14px;line-height:1.5}
+.product-tag{display:inline-block;background:rgba(232,201,138,0.3);color:var(--brown);font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px}
 
-  /* ─── HERO ───────────────────────────────────────────────────── */
-  #inicio {
-    min-height: 100vh; padding-top: 120px; padding-bottom: 60px;
-    display: flex; flex-direction: column; justify-content: center;
-    position: relative; overflow: hidden;
-  }
-  .hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(201,149,106,0.12); border: 1px solid rgba(201,149,106,0.3);
-    border-radius: 40px; padding: 6px 16px; font-size: 13px; color: var(--muted);
-    margin-bottom: 22px; font-weight: 500;
-  }
-  .hero-badge-dot { width: 7px; height: 7px; background: var(--gold); border-radius: 50%; }
-  .hero-text h1 { margin-bottom: 18px; }
-  .hero-text h1 em { font-style: italic; color: var(--gold); }
-  .hero-text p { color: var(--text-sub); font-size: 17px; margin-bottom: 30px; max-width: 420px; }
-  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+/* HISTORIA */
+#historia{background:var(--cream)}
+.historia-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.historia-img{border-radius:20px;overflow:hidden;aspect-ratio:3/4;background:var(--bg-soft);border:1px solid var(--border)}
+.historia-img img{width:100%;height:100%;object-fit:cover}
+.historia-text blockquote{font-family:'Lora',serif;font-style:italic;font-size:1.1rem;color:var(--gold);border-left:3px solid var(--gold-lt);padding-left:20px;margin:20px 0}
+.historia-valores{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.valor-chip{background:rgba(201,149,106,0.12);border:1px solid rgba(201,149,106,0.25);border-radius:40px;padding:6px 16px;font-size:13px;color:var(--brown);font-weight:500}
 
-  /* ── imagen hero ── */
-  /* 
-   * 📸 IMAGEN HERO (foto principal grande)
-   * Para cambiar: reemplazá src="img/hero.jpg" con la ruta de tu foto.
-   * Ejemplo: src="fotos/tortadeldia.jpg"
-   */
-  .hero-img-wrap {
-    border-radius: 24px; overflow: hidden;
-    aspect-ratio: 4/5; background: var(--bg-soft);
-    border: 1px solid var(--border);
-    position: relative;
-  }
-  .hero-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
-  .img-placeholder {
-    width: 100%; height: 100%; display: flex; flex-direction: column;
-    align-items: center; justify-content: center; gap: 10px;
-    background: var(--bg-soft); color: var(--muted);
-  }
-  .img-placeholder svg { opacity: .4; }
-  .img-placeholder p { font-size: 13px; opacity: .6; text-align: center; line-height: 1.5; }
-  .hero-float {
-    position: absolute; bottom: -16px; left: -16px;
-    background: var(--white); border-radius: var(--r); padding: 14px 18px;
-    border: 1px solid var(--border); box-shadow: var(--shadow);
-    font-size: 13px; color: var(--text-sub);
-  }
-  .hero-float strong { display: block; font-size: 22px; font-weight: 600; color: var(--brown-dk); font-family: 'Playfair Display', serif; }
+/* CATÁLOGO */
+#catalogo{background:var(--bg-soft)}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:40px}
+.cat-accordion{background:var(--white);border-radius:var(--r);border:1px solid var(--border);overflow:hidden}
+.cat-accordion-btn{width:100%;display:flex;align-items:center;justify-content:space-between;padding:18px 20px;background:none;border:none;cursor:pointer;font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--brown-dk);text-align:left;transition:background .15s}
+.cat-accordion-btn:hover{background:var(--bg-soft)}
+.cat-accordion-btn .arrow{width:20px;height:20px;border-radius:50%;background:rgba(201,149,106,0.12);color:var(--gold);display:flex;align-items:center;justify-content:center;transition:transform .22s;flex-shrink:0;font-size:12px}
+.cat-accordion.open .arrow{transform:rotate(180deg)}
+.cat-accordion-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.cat-accordion.open .cat-accordion-body{max-height:900px}
+.cat-accordion-inner{padding:0 20px 18px}
+.cat-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);font-size:15px}
+.cat-item:last-child{border-bottom:none}
+.cat-dot{width:6px;height:6px;border-radius:50%;background:var(--gold-lt);flex-shrink:0;margin-top:8px}
+.cat-name{font-weight:500;color:var(--text)}
+.cat-desc{font-size:13px;color:var(--text-sub)}
+.encargo-box{background:linear-gradient(135deg,var(--brown-dk) 0%,#6B3A1F 100%);border-radius:var(--r);padding:40px;color:var(--cream);display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center}
+.encargo-box h3{font-size:1.5rem;color:var(--gold-lt);margin-bottom:10px}
+.encargo-box p{opacity:.8;font-size:15px}
+.encargo-examples{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.encargo-tag{background:rgba(232,201,138,0.2);border:1px solid rgba(232,201,138,0.3);border-radius:20px;padding:4px 12px;font-size:12px;color:var(--gold-lt)}
 
-  /* ─── PRODUCTOS DESTACADOS ───────────────────────────────────── */
-  #destacados { background: var(--bg-soft); }
-  .products-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px; margin-top: 40px;
-  }
-  .product-card {
-    background: var(--white); border-radius: var(--r);
-    border: 1px solid var(--border); overflow: hidden;
-    transition: transform .22s, box-shadow .22s;
-  }
-  .product-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+/* ENCARGOS FORM */
+#encargos{background:var(--cream)}
+.encargos-inner{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start}
+.encargo-form-card{background:var(--white);border-radius:var(--r);border:1px solid var(--border);padding:30px}
+.form-group{margin-bottom:18px}
+.form-group label{display:block;font-size:14px;font-weight:600;color:var(--brown);margin-bottom:6px}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:12px 14px;border-radius:var(--r-sm);border:1.5px solid var(--border);background:var(--bg-soft);font-family:'Nunito',sans-serif;font-size:15px;color:var(--text);outline:none;transition:border-color .18s}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--gold)}
+.form-group textarea{resize:vertical;min-height:90px}
+.form-group.error input,.form-group.error textarea,.form-group.error select{border-color:#e74c3c!important}
+.form-group .err-msg{display:none;font-size:12px;color:#e74c3c;margin-top:4px}
+.form-group.error .err-msg{display:block}
 
-  /* 
-   * 📸 IMÁGENES DE PRODUCTOS
-   * Para cambiar cada foto, buscá el comentario con el nombre del producto
-   * y reemplazá src="img/nombre.jpg" con tu foto.
-   * Medida recomendada: 400x300px o similar, horizontal.
-   */
-  .product-img {
-    aspect-ratio: 4/3; overflow: hidden;
-    background: var(--bg-soft); position: relative;
-  }
-  .product-img img { width: 100%; height: 100%; object-fit: cover; }
-  .product-info { padding: 16px; }
-  .product-info h3 { font-size: 1.05rem; margin-bottom: 4px; }
-  .product-info p { font-size: 13px; color: var(--text-sub); margin-bottom: 14px; line-height: 1.5; }
-  .product-tag {
-    display: inline-block; background: rgba(232,201,138,0.3);
-    color: var(--brown); font-size: 11px; font-weight: 600;
-    padding: 3px 10px; border-radius: 20px; letter-spacing: .05em;
-  }
+/* CONTACTO */
+#contacto{background:var(--bg-soft)}
+.contacto-inner{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start}
+.contact-cards{display:flex;flex-direction:column;gap:16px}
+.contact-card{background:var(--white);border-radius:var(--r);border:1px solid var(--border);padding:22px 24px;display:flex;align-items:center;gap:18px;transition:transform .2s,box-shadow .2s}
+.contact-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.contact-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.contact-icon svg{width:24px;height:24px}
+.contact-card-body{flex:1;min-width:0}
+.contact-card-body h4{font-size:15px;font-weight:600;margin-bottom:2px;color:var(--brown-dk)}
+.contact-card-link{display:inline-block;font-size:15px;font-weight:700;margin-top:4px}
+.contact-info{background:var(--white);border-radius:var(--r);border:1px solid var(--border);padding:30px}
+.contact-info h3{margin-bottom:18px;font-size:1.2rem}
+.info-row{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);font-size:15px}
+.info-row:last-child{border-bottom:none}
+.info-label{color:var(--text-sub);font-weight:500;min-width:110px}
+.info-val{color:var(--text)}
 
-  /* ─── HISTORIA ───────────────────────────────────────────────── */
-  #historia { background: var(--cream); }
-  .historia-inner {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
-  }
-  /*
-   * 📸 FOTO DE LA MAMÁ
-   * Reemplazá src="img/mama.jpg" con tu foto.
-   */
-  .historia-img {
-    border-radius: 20px; overflow: hidden; aspect-ratio: 3/4;
-    background: var(--bg-soft); border: 1px solid var(--border);
-  }
-  .historia-img img { width: 100%; height: 100%; object-fit: cover; }
-  .historia-text blockquote {
-    font-family: 'Lora', serif; font-style: italic;
-    font-size: 1.15rem; color: var(--gold); border-left: 3px solid var(--gold-lt);
-    padding-left: 20px; margin: 20px 0;
-  }
-  .historia-valores {
-    display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px;
-  }
-  .valor-chip {
-    background: rgba(201,149,106,0.12); border: 1px solid rgba(201,149,106,0.25);
-    border-radius: 40px; padding: 6px 16px; font-size: 13px;
-    color: var(--brown); font-weight: 500;
-  }
+/* FAQ */
+#faq{background:var(--cream)}
+.faq-list{max-width:680px;margin-top:36px}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-btn{width:100%;display:flex;justify-content:space-between;align-items:center;padding:20px 0;background:none;border:none;cursor:pointer;font-family:'Playfair Display',serif;font-size:1rem;color:var(--brown-dk);text-align:left;gap:16px}
+.faq-btn .faq-arrow{color:var(--gold);font-size:18px;transition:transform .22s;flex-shrink:0}
+.faq-item.open .faq-arrow{transform:rotate(45deg)}
+.faq-body{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.faq-item.open .faq-body{max-height:300px}
+.faq-body p{padding-bottom:18px;color:var(--text-sub);font-size:15px}
 
-  /* ─── CATÁLOGO ───────────────────────────────────────────────── */
-  #catalogo { background: var(--bg-soft); }
-  .catalogo-intro { max-width: 580px; margin-bottom: 40px; }
-  .cat-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 16px; margin-bottom: 40px;
-  }
-  .cat-accordion {
-    background: var(--white); border-radius: var(--r);
-    border: 1px solid var(--border); overflow: hidden;
-  }
-  .cat-accordion-btn {
-    width: 100%; display: flex; align-items: center; justify-content: space-between;
-    padding: 18px 20px; background: none; border: none; cursor: pointer;
-    font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--brown-dk);
-    text-align: left; transition: background .15s;
-  }
-  .cat-accordion-btn:hover { background: var(--bg-soft); }
-  .cat-accordion-btn .arrow {
-    width: 20px; height: 20px; border-radius: 50%;
-    background: rgba(201,149,106,0.12); color: var(--gold);
-    display: flex; align-items: center; justify-content: center;
-    transition: transform .22s; flex-shrink: 0; font-size: 12px;
-  }
-  .cat-accordion.open .arrow { transform: rotate(180deg); }
-  .cat-accordion-body {
-    max-height: 0; overflow: hidden; transition: max-height .35s ease;
-  }
-  .cat-accordion.open .cat-accordion-body { max-height: 600px; }
-  .cat-accordion-inner { padding: 0 20px 18px; }
-  .cat-item {
-    display: flex; align-items: flex-start; gap: 10px;
-    padding: 10px 0; border-bottom: 1px solid var(--border);
-    font-size: 15px;
-  }
-  .cat-item:last-child { border-bottom: none; }
-  .cat-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold-lt); flex-shrink: 0; margin-top: 8px; }
-  .cat-name { font-weight: 500; color: var(--text); }
-  .cat-desc { font-size: 13px; color: var(--text-sub); }
+/* FOOTER */
+footer{background:var(--brown-dk);color:rgba(250,240,224,0.7);padding:50px 5vw 30px}
+.footer-inner{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.footer-brand h3{font-family:'Playfair Display',serif;color:var(--cream);font-size:1.4rem;margin-bottom:10px}
+.footer-brand p{font-size:14px;line-height:1.7;max-width:300px}
+.footer-col h4{font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-lt);margin-bottom:14px}
+.footer-col a{display:block;font-size:14px;color:rgba(250,240,224,0.6);margin-bottom:8px;transition:color .18s}
+.footer-col a:hover{color:var(--gold-lt)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.1);padding-top:24px;display:flex;justify-content:space-between;font-size:13px}
+.social-links{display:flex;gap:12px;margin-top:18px}
+.social-link{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;transition:background .18s}
+.social-link:hover{background:rgba(201,149,106,0.3)}
+.social-link svg{width:16px;height:16px}
 
-  /* encargos */
-  .encargo-box {
-    background: linear-gradient(135deg, var(--brown-dk) 0%, #6B3A1F 100%);
-    border-radius: var(--r); padding: 40px; color: var(--cream);
-    display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: center;
-  }
-  .encargo-box h3 { font-size: 1.5rem; color: var(--gold-lt); margin-bottom: 10px; }
-  .encargo-box p { opacity: .8; font-size: 15px; }
-  .encargo-examples { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
-  .encargo-tag {
-    background: rgba(232,201,138,0.2); border: 1px solid rgba(232,201,138,0.3);
-    border-radius: 20px; padding: 4px 12px; font-size: 12px; color: var(--gold-lt);
-  }
+.fade-up{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.visible{opacity:1;transform:none}
 
-  /* ─── ENCARGOS ───────────────────────────────────────────────── */
-  #encargos { background: var(--cream); }
-  .encargos-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; }
-  .encargo-form-card {
-    background: var(--white); border-radius: var(--r);
-    border: 1px solid var(--border); padding: 30px;
-  }
-  .form-group { margin-bottom: 18px; }
-  .form-group label { display: block; font-size: 14px; font-weight: 600; color: var(--brown); margin-bottom: 6px; }
-  .form-group input, .form-group textarea, .form-group select {
-    width: 100%; padding: 12px 14px; border-radius: var(--r-sm);
-    border: 1.5px solid var(--border); background: var(--bg-soft);
-    font-family: 'Nunito', sans-serif; font-size: 15px; color: var(--text);
-    outline: none; transition: border-color .18s;
-  }
-  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--gold); }
-  .form-group textarea { resize: vertical; min-height: 90px; }
-
-  /* ─── CONTACTO / ENCONTRANOS ─────────────────────────────────── */
-  #contacto { background: var(--bg-soft); }
-  .contacto-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; }
-  .contact-cards { display: flex; flex-direction: column; gap: 16px; }
-  .contact-card {
-    background: var(--white); border-radius: var(--r);
-    border: 1px solid var(--border); padding: 22px 24px;
-    display: flex; align-items: center; gap: 18px;
-    transition: transform .2s, box-shadow .2s;
-  }
-  .contact-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
-  .contact-icon {
-    width: 48px; height: 48px; border-radius: 14px;
-    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  }
-  .contact-icon svg { width: 24px; height: 24px; }
-  .contact-card h4 { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
-  .contact-card p { font-size: 14px; color: var(--text-sub); }
-  .contact-card a { font-size: 14px; font-weight: 600; display: block; margin-top: 6px; }
-  .contact-info { background: var(--white); border-radius: var(--r); border: 1px solid var(--border); padding: 30px; }
-  .contact-info h3 { margin-bottom: 18px; font-size: 1.2rem; }
-  .info-row { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 15px; }
-  .info-row:last-child { border-bottom: none; }
-  .info-label { color: var(--text-sub); font-weight: 500; min-width: 110px; }
-  .info-val { color: var(--text); }
-
-  /* ─── FAQ ────────────────────────────────────────────────────── */
-  #faq { background: var(--cream); }
-  .faq-list { max-width: 680px; margin-top: 36px; }
-  .faq-item { border-bottom: 1px solid var(--border); }
-  .faq-btn {
-    width: 100%; display: flex; justify-content: space-between; align-items: center;
-    padding: 20px 0; background: none; border: none; cursor: pointer;
-    font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--brown-dk);
-    text-align: left; gap: 16px;
-  }
-  .faq-btn .faq-arrow { color: var(--gold); font-size: 18px; transition: transform .22s; flex-shrink: 0; }
-  .faq-item.open .faq-arrow { transform: rotate(45deg); }
-  .faq-body { max-height: 0; overflow: hidden; transition: max-height .3s ease; }
-  .faq-item.open .faq-body { max-height: 300px; }
-  .faq-body p { padding-bottom: 18px; color: var(--text-sub); font-size: 15px; }
-
-  /* ─── FOOTER ─────────────────────────────────────────────────── */
-  footer {
-    background: var(--brown-dk); color: rgba(250,240,224,0.7);
-    padding: 50px 5vw 30px;
-  }
-  .footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
-  .footer-brand h3 { font-family: 'Playfair Display', serif; color: var(--cream); font-size: 1.4rem; margin-bottom: 10px; }
-  .footer-brand p { font-size: 14px; line-height: 1.7; max-width: 300px; }
-  .footer-col h4 { font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-lt); margin-bottom: 14px; }
-  .footer-col a { display: block; font-size: 14px; color: rgba(250,240,224,0.6); margin-bottom: 8px; transition: color .18s; }
-  .footer-col a:hover { color: var(--gold-lt); }
-  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; justify-content: space-between; font-size: 13px; }
-  .social-links { display: flex; gap: 12px; margin-top: 18px; }
-  .social-link {
-    width: 36px; height: 36px; border-radius: 50%;
-    border: 1px solid rgba(255,255,255,0.15); display: flex;
-    align-items: center; justify-content: center; transition: background .18s;
-  }
-  .social-link:hover { background: rgba(201,149,106,0.3); }
-  .social-link svg { width: 16px; height: 16px; }
-
-  /* ─── ANIMACIONES DE ENTRADA ────────────────────────────────── */
-  .fade-up { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s ease; }
-  .fade-up.visible { opacity: 1; transform: none; }
-
-  /* ─── RESPONSIVE ─────────────────────────────────────────────── */
-  @media (max-width: 768px) {
-    .nav-links, .nav-cta { display: none; }
-    .hamburger { display: flex; }
-    .hero-inner, .historia-inner, .encargos-inner, .contacto-inner, .footer-inner { grid-template-columns: 1fr; }
-    .encargo-box { grid-template-columns: 1fr; }
-    .hero-img-wrap { aspect-ratio: 3/2; max-width: 100%; }
-    .hero-float { display: none; }
-    section { padding: 60px 5vw; }
-    .footer-inner { grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 480px) {
-    .footer-inner { grid-template-columns: 1fr; }
-  }
+@media(max-width:768px){
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+  .hero-inner,.historia-inner,.encargos-inner,.contacto-inner,.footer-inner{grid-template-columns:1fr}
+  .encargo-box{grid-template-columns:1fr}
+  .hero-img-wrap{aspect-ratio:3/2}
+  section{padding:60px 5vw}
+  .footer-inner{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){.footer-inner{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
-<!-- ─────────────────── NAV ─────────────────── -->
+<!-- NAV -->
 <nav>
   <div class="nav-logo">
-    La Panadería de Dai
-    <span>Hecho con amor · Argentina</span>
+    Dai_eth
+    <span>Pastelería artesanal · Argentina</span>
   </div>
   <ul class="nav-links">
     <li><a href="#inicio">Inicio</a></li>
@@ -400,9 +203,7 @@
       WhatsApp
     </a>
   </div>
-  <div class="hamburger" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
-  </div>
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
@@ -415,39 +216,33 @@
   <a href="#faq" onclick="toggleMenu()">Preguntas</a>
 </div>
 
-<!-- ─────────────────── HERO ─────────────────── -->
+<!-- HERO -->
 <section id="inicio">
   <div class="hero-inner">
     <div class="hero-text fade-up">
-      <div class="hero-badge"><div class="hero-badge-dot"></div> Panadería artesanal · Argentina</div>
+      <div class="hero-badge"><div class="hero-badge-dot"></div> Pastelería artesanal · Argentina</div>
       <h1>Hecho con amor, <em>de nuestra familia para vos</em></h1>
       <p>Cada pieza sale del horno con dedicación, ingredientes de calidad y el cariño que solo puede dar quien cocina con el alma.</p>
+      <p class="hero-frase">¿Buscás algo delicioso, casero y hecho con cariño? Acá te hacemos realidad tus antojos.</p>
       <div class="hero-btns">
         <a href="#catalogo" class="btn btn-primary">Ver catálogo</a>
         <a href="#encargos" class="btn btn-outline">Hacer un encargo</a>
       </div>
     </div>
-
     <div class="hero-img-wrap fade-up" style="transition-delay:.15s">
       <!--
-        📸 IMAGEN HERO (foto principal del sitio)
-        Para agregar tu foto: reemplazá este bloque por:
-        <img src="fotos/tu-foto.jpg" alt="Productos de la panadería">
-        (podés poner la foto en la misma carpeta que este archivo HTML)
+        📸 IMAGEN HERO
+        Reemplazá con: <img src="fotos/tu-foto.jpg" alt="Productos de Dai_eth">
       -->
       <div class="img-placeholder">
-        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" color="#C9956A"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-        <p>📸 Foto de tus productos<br><small>Reemplazá el bloque con tu imagen</small></p>
-      </div>
-      <div class="hero-float">
-        <strong>Con amor</strong>
-        Hecho de manera artesanal
+        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#C9956A" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+        <p>📸 Foto de tus productos<br><small>Reemplazá con tu imagen</small></p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─────────────────── NUESTROS FAVORITOS ─────────────────── -->
+<!-- NUESTROS FAVORITOS -->
 <section id="destacados">
   <div class="fade-up">
     <div class="section-tag">Lo más pedido</div>
@@ -455,231 +250,196 @@
     <div class="divider"></div>
     <p class="section-sub">Los productos que más nos piden y que salen con más amor del horno.</p>
   </div>
+  <div class="products-grid">
 
-  <div class="products-grid" style="margin-top:40px">
-
-    <!-- PRODUCTO 1 -->
     <div class="product-card fade-up">
       <div class="product-img">
-        <!--
-          📸 FOTO: Facturas
-          Reemplazá con: <img src="fotos/facturas.jpg" alt="Facturas">
-        -->
-        <div class="img-placeholder" style="height:100%">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#C9956A" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-          <p style="font-size:12px">Foto de Facturas</p>
-        </div>
+        <!-- 📸 Alfajores → <img src="fotos/alfajores.jpg" alt="Alfajores"> -->
+        <div class="img-placeholder" style="height:100%"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#C9956A" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><p style="font-size:12px">Foto de Alfajores</p></div>
       </div>
       <div class="product-info">
-        <h3>Facturas</h3>
-        <p>Esponjosas, doradas y recién salidas del horno. Una clásica.</p>
-        <span class="product-tag">Más pedido</span>
-      </div>
-    </div>
-
-    <!-- PRODUCTO 2 -->
-    <div class="product-card fade-up" style="transition-delay:.08s">
-      <div class="product-img">
-        <!--
-          📸 FOTO: Budines
-          Reemplazá con: <img src="fotos/budin.jpg" alt="Budines">
-        -->
-        <div class="img-placeholder" style="height:100%">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#C9956A" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-          <p style="font-size:12px">Foto de Budines</p>
-        </div>
-      </div>
-      <div class="product-info">
-        <h3>Budines</h3>
-        <p>Suaves como terciopelo. Una textura que no olvidás.</p>
-        <span class="product-tag">Clásico</span>
-      </div>
-    </div>
-
-    <!-- PRODUCTO 3 -->
-    <div class="product-card fade-up" style="transition-delay:.16s">
-      <div class="product-img">
-        <!--
-          📸 FOTO: Chocotorta
-          Reemplazá con: <img src="fotos/chocotorta.jpg" alt="Chocotorta">
-        -->
-        <div class="img-placeholder" style="height:100%">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#C9956A" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-          <p style="font-size:12px">Foto de Chocotorta</p>
-        </div>
-      </div>
-      <div class="product-info">
-        <h3>Chocotorta</h3>
-        <p>La favorita de todos. Con el sabor que nos hace acordar a casa.</p>
+        <h3>Alfajores</h3>
+        <p>Bañados en chocolate, rellenos de dulce de leche. Una debilidad.</p>
         <span class="product-tag">Favorito</span>
       </div>
     </div>
 
-    <!-- PRODUCTO 4 -->
-    <div class="product-card fade-up" style="transition-delay:.24s">
+    <div class="product-card fade-up" style="transition-delay:.08s">
       <div class="product-img">
-        <!--
-          📸 FOTO: Brownie
-          Reemplazá con: <img src="fotos/brownie.jpg" alt="Brownie">
-        -->
-        <div class="img-placeholder" style="height:100%">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#C9956A" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-          <p style="font-size:12px">Foto de Brownie</p>
-        </div>
+        <!-- 📸 Torta personalizada → <img src="fotos/torta-personalizada.jpg" alt="Torta personalizada"> -->
+        <div class="img-placeholder" style="height:100%"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#C9956A" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><p style="font-size:12px">Foto de Torta personalizada</p></div>
       </div>
       <div class="product-info">
-        <h3>Brownies</h3>
-        <p>Húmedos y chocolatosos. Irresistibles.</p>
-        <span class="product-tag">Dulce tentación</span>
+        <h3>Torta personalizada</h3>
+        <p>Tu sabor, tu temática, tu ocasión. Hecha con todos los detalles.</p>
+        <span class="product-tag">Encargo especial</span>
       </div>
     </div>
+
+    <div class="product-card fade-up" style="transition-delay:.16s">
+      <div class="product-img">
+        <!-- 📸 Chocotorta → <img src="fotos/chocotorta.jpg" alt="Chocotorta"> -->
+        <div class="img-placeholder" style="height:100%"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#C9956A" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><p style="font-size:12px">Foto de Chocotorta</p></div>
+      </div>
+      <div class="product-info">
+        <h3>Chocotorta</h3>
+        <p>El clásico que nunca falla. Con el sabor que hace acordar a casa.</p>
+        <span class="product-tag">Clásico</span>
+      </div>
+    </div>
+
+    <div class="product-card fade-up" style="transition-delay:.24s">
+      <div class="product-img">
+        <!-- 📸 Cuadraditos de limón → <img src="fotos/cuadraditos.jpg" alt="Cuadraditos de limón"> -->
+        <div class="img-placeholder" style="height:100%"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#C9956A" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><p style="font-size:12px">Foto de Cuadraditos de limón</p></div>
+      </div>
+      <div class="product-info">
+        <h3>Cuadraditos de limón</h3>
+        <p>Base crocante con cobertura cítrica fresca. Irresistibles.</p>
+        <span class="product-tag">Imperdible</span>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<!-- ─────────────────── NUESTRA HISTORIA ─────────────────── -->
+<!-- NUESTRA HISTORIA -->
 <section id="historia">
   <div class="historia-inner">
     <div class="historia-img fade-up">
-      <!--
-        📸 FOTO DE DAI (tu mamá)
-        Reemplazá con: <img src="fotos/mama.jpg" alt="Dai, la pastelera">
-      -->
-      <div class="img-placeholder" style="height:100%">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#C9956A" stroke-width="1.2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        <p style="font-size:12px">📸 Foto de Dai<br><small>Reemplazá con tu imagen</small></p>
-      </div>
+      <!-- 📸 Foto de Dai → <img src="fotos/dai.jpg" alt="Dai"> -->
+      <div class="img-placeholder" style="height:100%"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#C9956A" stroke-width="1.2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><p style="font-size:12px">📸 Foto de Dai<br><small>Reemplazá con tu imagen</small></p></div>
     </div>
     <div class="historia-text fade-up" style="transition-delay:.1s">
       <div class="section-tag">Nuestra historia</div>
       <h2 class="section-title">Un sueño hecho con las manos</h2>
       <div class="divider"></div>
-      <p style="color:var(--text-sub);margin-bottom:16px">Soy Dai, y esta panadería es mi pasión. Empecé a hornear por amor a la buena comida, y hoy cada producto que sale de mi cocina lleva todo mi cariño.</p>
-      <blockquote>"Cada factura, cada budin, cada torta — es un abrazo que mando a través de la comida."</blockquote>
-      <p style="color:var(--text-sub)">Trabajo sola, con dedicación artesanal y sin apuros. Porque lo que se hace con amor, se nota.</p>
+      <p style="color:var(--text-sub);margin-bottom:16px">¡Hola! Soy Dai... apasionada por los dulces y los detalles. Entre recetas y risas, nuestra misión es endulzar tu día. ¡Bienvenidos a nuestro universo azucarado! 💞</p>
+      <blockquote>"¿Buscás algo delicioso, casero y hecho con cariño? Acá te hacemos realidad tus antojos."</blockquote>
+      <p style="color:var(--text-sub)">Trabajamos con dedicación artesanal y sin apuros, porque lo que se hace con amor se nota.</p>
       <div class="historia-valores">
         <span class="valor-chip">Artesanal</span>
         <span class="valor-chip">100% casero</span>
         <span class="valor-chip">Con amor</span>
         <span class="valor-chip">Argentina</span>
-        <span class="valor-chip">Sin apuros</span>
+        <span class="valor-chip">En familia</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─────────────────── CATÁLOGO ─────────────────── -->
+<!-- CATÁLOGO -->
 <section id="catalogo">
-  <div class="catalogo-intro fade-up">
+  <div class="fade-up" style="max-width:580px;margin-bottom:40px">
     <div class="section-tag">Todo lo que hacemos</div>
     <h2 class="section-title">Catálogo completo</h2>
     <div class="divider"></div>
-    <p class="section-sub">Expandí cada categoría para ver lo que tenemos. ¿No encontrás lo que buscás? ¡Preguntanos!</p>
+    <p class="section-sub">Expandí cada categoría para ver todo. ¿No encontrás lo que buscás? ¡Escribinos!</p>
   </div>
 
   <div class="cat-grid">
 
-    <!-- Bizcochuelos y tortas base -->
+    <!-- Tartas -->
     <div class="cat-accordion fade-up" id="acc-1">
-      <button class="cat-accordion-btn" onclick="toggleAcc('acc-1')">
-        Bizcochuelos y tortas base
-        <span class="arrow">▼</span>
-      </button>
-      <div class="cat-accordion-body">
-        <div class="cat-accordion-inner">
-          <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Bizcochuelo clásico</div><div class="cat-desc">Esponjoso, perfecto para cortar y rellenar</div></div></div>
-          <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Torta de chocolate</div><div class="cat-desc">Intensa, húmeda y con sabor profundo</div></div></div>
-          <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Torta de coco</div><div class="cat-desc">Suave y aromática, un clásico de la casa</div></div></div>
-          <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Torta de chocolate con dulce de leche</div><div class="cat-desc">El dúo perfecto que no falla</div></div></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Facturas y masas -->
-    <div class="cat-accordion fade-up" id="acc-2">
-      <button class="cat-accordion-btn" onclick="toggleAcc('acc-2')">
-        Facturas y masas
-        <span class="arrow">▼</span>
-      </button>
-      <div class="cat-accordion-body">
-        <div class="cat-accordion-inner">
-          <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Facturas surtidas</div><div class="cat-desc">Medialunas, cañoncitos, vigilantes, bolas de fraile</div></div></div>
-          <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Galletitas</div><div class="cat-desc">Variedad de galletitas dulces y saladas</div></div></div>
-          <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Muffins</div><div class="cat-desc">De vainilla, chocolate, arándanos y más</div></div></div>
-        </div>
-      </div>
+      <button class="cat-accordion-btn" onclick="toggleAcc('acc-1')">Tartas <span class="arrow">▼</span></button>
+      <div class="cat-accordion-body"><div class="cat-accordion-inner">
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Tarta de coco</div><div class="cat-desc">Suave, aromática y bien dulce</div></div></div>
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Tarta de frutilla</div><div class="cat-desc">Con base crocante y relleno fresco</div></div></div>
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Pastafrola</div><div class="cat-desc">Con dulce de membrillo o batata, bien casera</div></div></div>
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Lemon pie</div><div class="cat-desc">Fresca, cremosa y con merengue dorado</div></div></div>
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Tarta de dulce de leche</div><div class="cat-desc">Para los fanáticos del dulce de leche</div></div></div>
+      </div></div>
     </div>
 
     <!-- Tortas y postres especiales -->
+    <div class="cat-accordion fade-up" id="acc-2">
+      <button class="cat-accordion-btn" onclick="toggleAcc('acc-2')">Tortas y postres especiales <span class="arrow">▼</span></button>
+      <div class="cat-accordion-body"><div class="cat-accordion-inner">
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Tortas personalizadas</div><div class="cat-desc">Tu sabor, tu temática, tu celebración</div></div></div>
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Cheesecake</div><div class="cat-desc">Cremosa, suave y con base de galletita</div></div></div>
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Tarta de ricota</div><div class="cat-desc">Suave y perfectamente equilibrada</div></div></div>
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Chocotorta</div><div class="cat-desc">El clásico argentino que nunca falla</div></div></div>
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Brownie</div><div class="cat-desc">Húmedo, denso y con costra crujiente</div></div></div>
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Rogel</div><div class="cat-desc">Capas crocantes con dulce de leche y merengue</div></div></div>
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Palmera</div><div class="cat-desc">Hojaldrada, crocante y caramelizada</div></div></div>
+      </div></div>
+    </div>
+
+    <!-- Budín / Muffins -->
     <div class="cat-accordion fade-up" id="acc-3">
-      <button class="cat-accordion-btn" onclick="toggleAcc('acc-3')">
-        Tortas y postres especiales
-        <span class="arrow">▼</span>
-      </button>
-      <div class="cat-accordion-body">
-        <div class="cat-accordion-inner">
-          <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Lemon pie</div><div class="cat-desc">Fresco, cremoso y con merengue dorado</div></div></div>
-          <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Chocotorta</div><div class="cat-desc">El clásico argentino que nunca falla</div></div></div>
-          <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Tarta de ricota</div><div class="cat-desc">Suave, cremosa y perfectamente equilibrada</div></div></div>
-          <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Brownies</div><div class="cat-desc">Húmedos y con costra crujiente</div></div></div>
-        </div>
-      </div>
+      <button class="cat-accordion-btn" onclick="toggleAcc('acc-3')">Budín / Muffins <span class="arrow">▼</span></button>
+      <div class="cat-accordion-body"><div class="cat-accordion-inner">
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Vainilla</div><div class="cat-desc">Suave y aromático, ideal para el desayuno</div></div></div>
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Chocolate</div><div class="cat-desc">Húmedo y con sabor intenso</div></div></div>
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Marmolado</div><div class="cat-desc">Vainilla y chocolate en un solo bocado</div></div></div>
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Frutos secos</div><div class="cat-desc">Nueces, almendras y lo que tengamos</div></div></div>
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Frutos rojos</div><div class="cat-desc">Frescos y con toque ácido irresistible</div></div></div>
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Cítricos</div><div class="cat-desc">De naranja, limón o banana</div></div></div>
+      </div></div>
     </div>
 
-    <!-- Budines -->
+    <!-- Candy temático -->
     <div class="cat-accordion fade-up" id="acc-4">
-      <button class="cat-accordion-btn" onclick="toggleAcc('acc-4')">
-        Budines
-        <span class="arrow">▼</span>
-      </button>
-      <div class="cat-accordion-body">
-        <div class="cat-accordion-inner">
-          <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Budin inglés</div><div class="cat-desc">Con frutas, denso y muy sabroso</div></div></div>
-          <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Budin de vainilla</div><div class="cat-desc">Suave como terciopelo, ideal para desayuno</div></div></div>
-          <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Budin de limón</div><div class="cat-desc">Fresco y con toque cítrico</div></div></div>
-          <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Budin de chocolate</div><div class="cat-desc">Para los amantes del cacao</div></div></div>
-        </div>
-      </div>
+      <button class="cat-accordion-btn" onclick="toggleAcc('acc-4')">Candy temático 🍬 <span class="arrow">▼</span></button>
+      <div class="cat-accordion-body"><div class="cat-accordion-inner">
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Galletitas decoradas</div><div class="cat-desc">Con glasé, temáticas para cualquier ocasión</div></div></div>
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Chupetines</div><div class="cat-desc">De chocolate artesanal en palito</div></div></div>
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Bombones</div><div class="cat-desc">Rellenos y bañados a mano</div></div></div>
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Chocolatines</div><div class="cat-desc">Pequeños y adictivos</div></div></div>
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Oreos / chocolinas bañadas</div><div class="cat-desc">Bañadas en chocolate artesanal</div></div></div>
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Donitas</div><div class="cat-desc">Pequeñas, tiernas y decoradas</div></div></div>
+      </div></div>
     </div>
 
-    <!-- Chocolates y mini bocados -->
+    <!-- Alfajores -->
     <div class="cat-accordion fade-up" id="acc-5">
-      <button class="cat-accordion-btn" onclick="toggleAcc('acc-5')">
-        Chocolates y bocaditos
-        <span class="arrow">▼</span>
-      </button>
-      <div class="cat-accordion-body">
-        <div class="cat-accordion-inner">
-          <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Chocolates artesanales</div><div class="cat-desc">Rellenos y bañados, hechos a mano</div></div></div>
-          <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Trufas</div><div class="cat-desc">De chocolate, coco y maní</div></div></div>
-        </div>
-      </div>
+      <button class="cat-accordion-btn" onclick="toggleAcc('acc-5')">Alfajores <span class="arrow">▼</span></button>
+      <div class="cat-accordion-body"><div class="cat-accordion-inner">
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Bañados en chocolate blanco</div><div class="cat-desc">Rellenos de dulce de leche, suaves y cremosos</div></div></div>
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Bañados en chocolate con leche</div><div class="cat-desc">El clásico que nunca defrauda</div></div></div>
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Bañados en semiamargo</div><div class="cat-desc">Para los que prefieren menos dulce</div></div></div>
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Santafesinos</div><div class="cat-desc">De maicena, con dulce de leche y coco</div></div></div>
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">De maicena</div><div class="cat-desc">Tiernos, con dulce de leche y azúcar impalpable</div></div></div>
+      </div></div>
     </div>
 
-    <!-- Temporada / Especiales -->
+    <!-- Desayunos -->
     <div class="cat-accordion fade-up" id="acc-6">
-      <button class="cat-accordion-btn" onclick="toggleAcc('acc-6')">
-        Especiales de temporada
-        <span class="arrow">▼</span>
-      </button>
-      <div class="cat-accordion-body">
-        <div class="cat-accordion-inner">
-          <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Rosca de Reyes</div><div class="cat-desc">Solo en enero, pedidos con anticipación</div></div></div>
-          <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Pan dulce navideño</div><div class="cat-desc">Artesanal, con frutas y nueces</div></div></div>
-          <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Sorpresas estacionales</div><div class="cat-desc">Seguinos en Instagram para novedades</div></div></div>
-        </div>
-      </div>
+      <button class="cat-accordion-btn" onclick="toggleAcc('acc-6')">Desayunos ☀️ <span class="arrow">▼</span></button>
+      <div class="cat-accordion-body"><div class="cat-accordion-inner">
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Desayunos personalizados</div><div class="cat-desc">Armamos la caja ideal para regalar o darte un gusto: medialunas, muffins, cuadraditos, budín y más. Consultanos qué llevar.</div></div></div>
+      </div></div>
     </div>
+
+    <!-- Cuadraditos -->
+    <div class="cat-accordion fade-up" id="acc-7">
+      <button class="cat-accordion-btn" onclick="toggleAcc('acc-7')">Cuadraditos <span class="arrow">▼</span></button>
+      <div class="cat-accordion-body"><div class="cat-accordion-inner">
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Cuadraditos de limón</div><div class="cat-desc">Base crocante con cobertura cítrica fresca y azúcar impalpable</div></div></div>
+      </div></div>
+    </div>
+
+    <!-- Especiales de temporada -->
+    <div class="cat-accordion fade-up" id="acc-8">
+      <button class="cat-accordion-btn" onclick="toggleAcc('acc-8')">Especiales de temporada 🗓️ <span class="arrow">▼</span></button>
+      <div class="cat-accordion-body"><div class="cat-accordion-inner">
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Huevos de Pascua</div><div class="cat-desc">Artesanales, con rellenos sorpresa</div></div></div>
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Pan dulce</div><div class="cat-desc">Con frutas y nueces, disponible en navidad</div></div></div>
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Rosca de Reyes</div><div class="cat-desc">Solo en enero, pedidos con anticipación</div></div></div>
+        <div class="cat-item"><div class="cat-dot"></div><div><div class="cat-name">Fechas especiales</div><div class="cat-desc">Seguinos en Instagram para ver las novedades de cada fecha</div></div></div>
+      </div></div>
+    </div>
+
   </div>
 
-  <!-- Encargos personalizados (banner) -->
   <div class="encargo-box fade-up">
     <div>
       <h3>¿Querés algo especial?</h3>
-      <p>Hacemos encargos personalizados para cumpleaños, eventos y celebraciones. ¿Una torta de Spiderman? ¿De tu personaje favorito? Contanos tu idea.</p>
+      <p>Hacemos encargos personalizados para cumpleaños, eventos y celebraciones. ¿Una torta de Spiderman? ¿Una candy bar temática? Contanos tu idea.</p>
       <div class="encargo-examples">
         <span class="encargo-tag">Torta temática</span>
         <span class="encargo-tag">Spiderman</span>
-        <span class="encargo-tag">Princesas</span>
+        <span class="encargo-tag">Candy bar</span>
         <span class="encargo-tag">Cumpleaños</span>
         <span class="encargo-tag">Tu idea acá</span>
       </div>
@@ -688,7 +448,7 @@
   </div>
 </section>
 
-<!-- ─────────────────── ENCARGOS ─────────────────── -->
+<!-- ENCARGOS -->
 <section id="encargos">
   <div class="fade-up" style="margin-bottom:40px">
     <div class="section-tag">Personalizados</div>
@@ -699,47 +459,52 @@
   <div class="encargos-inner">
     <div class="encargo-form-card fade-up">
       <h3 style="margin-bottom:20px;font-size:1.2rem">Contanos tu encargo</h3>
-      <div class="form-group">
+
+      <div class="form-group" id="fg-nombre">
         <label>Tu nombre</label>
-        <input type="text" placeholder="¿Cómo te llamás?">
+        <input type="text" id="f-nombre" placeholder="¿Cómo te llamás?" oninput="limpiarError('fg-nombre')">
+        <span class="err-msg">Por favor ingresá tu nombre.</span>
       </div>
-      <div class="form-group">
+      <div class="form-group" id="fg-tel">
         <label>WhatsApp o teléfono</label>
-        <input type="tel" placeholder="+54 9 11 XXXX-XXXX">
+        <input type="tel" id="f-tel" placeholder="+54 9 11 XXXX-XXXX" oninput="limpiarError('fg-tel')">
+        <span class="err-msg">Por favor ingresá tu número.</span>
       </div>
-      <div class="form-group">
+      <div class="form-group" id="fg-encargo">
         <label>¿Qué querés encargar?</label>
-        <select>
-          <option value="">Elegí una opción…</option>
-          <option>Torta de cumpleaños</option>
-          <option>Torta temática (Spiderman, princesas, etc.)</option>
-          <option>Chocotorta</option>
-          <option>Lemon pie</option>
-          <option>Budines</option>
-          <option>Facturas para evento</option>
-          <option>Chocolates / bocaditos</option>
-          <option>Otro (lo cuento abajo)</option>
-        </select>
+        <input type="text" id="f-encargo" placeholder="Ej: alfajores, torta de cumpleaños, candy bar temático…" list="enc-sugerencias" oninput="limpiarError('fg-encargo')">
+        <datalist id="enc-sugerencias">
+          <option value="Torta personalizada"><option value="Torta temática (Spiderman, princesas…)">
+          <option value="Chocotorta"><option value="Cheesecake"><option value="Rogel"><option value="Lemon pie">
+          <option value="Alfajores"><option value="Budines"><option value="Muffins"><option value="Cuadraditos de limón">
+          <option value="Candy bar temático"><option value="Desayuno personalizado"><option value="Huevos de Pascua">
+          <option value="Donitas"><option value="Galletitas decoradas"><option value="Bombones">
+        </datalist>
+        <span class="err-msg">Contanos qué querés encargar.</span>
       </div>
-      <div class="form-group">
+      <div class="form-group" id="fg-fecha">
         <label>¿Para qué fecha lo necesitás?</label>
-        <input type="date">
+        <input type="date" id="f-fecha" oninput="limpiarError('fg-fecha')">
+        <span class="err-msg">Por favor elegí una fecha.</span>
       </div>
-      <div class="form-group">
+      <div class="form-group" id="fg-detalles">
         <label>Detalles del pedido</label>
-        <textarea placeholder="Contanos todo: sabores, decoración, cantidad, si es para cumpleaños de quién..."></textarea>
+        <textarea id="f-detalles" placeholder="Contanos todo: sabores, decoración, cantidad, para quién es…" oninput="limpiarError('fg-detalles')"></textarea>
+        <span class="err-msg">Agregá algún detalle del pedido.</span>
       </div>
-      <a href="https://wa.me/5491163211132?text=Hola%20Dai!%20Quiero%20hacer%20un%20encargo%20especial%20%F0%9F%8D%B0" target="_blank" class="btn btn-whatsapp" style="width:100%;justify-content:center">
+
+      <button onclick="enviarWpp()" class="btn btn-whatsapp" style="width:100%;justify-content:center">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
         Enviar por WhatsApp
-      </a>
+      </button>
     </div>
+
     <div class="fade-up" style="transition-delay:.12s">
       <h3 style="margin-bottom:18px;font-size:1.15rem">¿Cómo funciona?</h3>
       <div style="display:flex;flex-direction:column;gap:18px">
         <div style="display:flex;gap:16px;align-items:flex-start">
           <div style="width:36px;height:36px;border-radius:50%;background:var(--gold);color:var(--white);display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;font-size:14px">1</div>
-          <div><strong style="display:block;margin-bottom:4px">Mandás tu pedido</strong><p style="color:var(--text-sub);font-size:14px">Completás el formulario o nos escribís directo por WhatsApp.</p></div>
+          <div><strong style="display:block;margin-bottom:4px">Mandás tu pedido</strong><p style="color:var(--text-sub);font-size:14px">Completás el formulario — se arma el mensaje automáticamente y se abre WhatsApp con todo listo.</p></div>
         </div>
         <div style="display:flex;gap:16px;align-items:flex-start">
           <div style="width:36px;height:36px;border-radius:50%;background:var(--gold);color:var(--white);display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;font-size:14px">2</div>
@@ -758,49 +523,37 @@
   </div>
 </section>
 
-<!-- ─────────────────── ENCONTRANOS ─────────────────── -->
+<!-- ENCONTRANOS -->
 <section id="contacto">
   <div class="fade-up" style="margin-bottom:40px">
     <div class="section-tag">Encontranos</div>
     <h2 class="section-title">¿Dónde estamos?</h2>
     <div class="divider"></div>
-    <p class="section-sub">Escribinos por WhatsApp o seguinos en Instagram para ver las novedades y hacer tu pedido.</p>
+    <p class="section-sub">Escribinos por WhatsApp o seguinos en Instagram para novedades y pedidos.</p>
   </div>
   <div class="contacto-inner">
     <div class="contact-cards fade-up">
 
-      <!-- WhatsApp -->
-      <a href="https://wa.me/5491163211132" target="_blank" class="contact-card">
+      <!-- WhatsApp — solo icono + número clickeable -->
+      <a href="https://wa.me/5491163211132" target="_blank" class="contact-card" style="text-decoration:none">
         <div class="contact-icon" style="background:#E8F8F0">
-          <svg viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#25D366" width="28" height="28"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
         </div>
-        <div>
-          <h4>WhatsApp</h4>
-          <p>La forma más rápida de escribirnos</p>
-          <a style="color:#25D366">+54 9 11 6321-1132</a>
+        <div class="contact-card-body">
+          <span class="contact-card-link" style="color:#25D366;font-size:16px">+54 9 11 6321-1132</span>
         </div>
       </a>
 
-      <!-- Instagram -->
-      <a href="https://instagram.com/dai_eth" target="_blank" class="contact-card">
+      <!-- Instagram — solo icono + usuario clickeable -->
+      <a href="https://instagram.com/dai_eth" target="_blank" class="contact-card" style="text-decoration:none">
         <div class="contact-icon" style="background:#FDE8F0">
-          <svg viewBox="0 0 24 24" fill="url(#ig-grad)">
-            <defs>
-              <linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#f09433"/>
-                <stop offset="25%" stop-color="#e6683c"/>
-                <stop offset="50%" stop-color="#dc2743"/>
-                <stop offset="75%" stop-color="#cc2366"/>
-                <stop offset="100%" stop-color="#bc1888"/>
-              </linearGradient>
-            </defs>
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="url(#ig-g)">
+            <defs><linearGradient id="ig-g" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f09433"/><stop offset="50%" stop-color="#dc2743"/><stop offset="100%" stop-color="#bc1888"/></linearGradient></defs>
             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
           </svg>
         </div>
-        <div>
-          <h4>Instagram</h4>
-          <p>Ver las novedades y fotos de nuestros productos</p>
-          <a style="color:#cc2366">@dai_eth</a>
+        <div class="contact-card-body">
+          <span class="contact-card-link" style="color:#cc2366;font-size:16px">@dai_eth</span>
         </div>
       </a>
 
@@ -823,7 +576,7 @@
   </div>
 </section>
 
-<!-- ─────────────────── FAQ ─────────────────── -->
+<!-- FAQ -->
 <section id="faq">
   <div class="fade-up">
     <div class="section-tag">Preguntas frecuentes</div>
@@ -831,63 +584,27 @@
     <div class="divider"></div>
   </div>
   <div class="faq-list">
-    <div class="faq-item fade-up" id="faq-1">
-      <button class="faq-btn" onclick="toggleFaq('faq-1')">
-        ¿Cómo hago mi pedido?
-        <span class="faq-arrow">+</span>
-      </button>
-      <div class="faq-body"><p>Lo más fácil es escribirnos por WhatsApp al +54 9 11 6321-1132. También podés completar el formulario de encargos y te contactamos a la brevedad. Para pedidos especiales, cuanto antes nos avisás, mejor.</p></div>
-    </div>
-    <div class="faq-item fade-up" id="faq-2">
-      <button class="faq-btn" onclick="toggleFaq('faq-2')">
-        ¿Con cuánta anticipación tengo que encargar?
-        <span class="faq-arrow">+</span>
-      </button>
-      <div class="faq-body"><p>Para tortas y encargos especiales necesitamos al menos 48 horas de anticipación. Para eventos o pedidos grandes (tipo reunión familiar, cumpleaños), lo ideal es una semana antes.</p></div>
-    </div>
-    <div class="faq-item fade-up" id="faq-3">
-      <button class="faq-btn" onclick="toggleFaq('faq-3')">
-        ¿Hacen envíos a domicilio?
-        <span class="faq-arrow">+</span>
-      </button>
-      <div class="faq-body"><p>La entrega y las condiciones se coordinan directamente con Dai por WhatsApp, dependiendo de la zona y el tipo de pedido. ¡Escribinos y lo vemos juntos!</p></div>
-    </div>
-    <div class="faq-item fade-up" id="faq-4">
-      <button class="faq-btn" onclick="toggleFaq('faq-4')">
-        ¿Cómo pago mi pedido?
-        <span class="faq-arrow">+</span>
-      </button>
-      <div class="faq-body"><p>Aceptamos transferencia bancaria y efectivo. Para encargos especiales generalmente se pide una seña al confirmar el pedido.</p></div>
-    </div>
-    <div class="faq-item fade-up" id="faq-5">
-      <button class="faq-btn" onclick="toggleFaq('faq-5')">
-        ¿Hacen tortas temáticas?
-        <span class="faq-arrow">+</span>
-      </button>
-      <div class="faq-body"><p>¡Sí! Hacemos tortas personalizadas con la temática que quieras: Spiderman, princesas, personajes de serie, equipos de fútbol, y más. Contanos tu idea y lo hacemos realidad. Solo necesitamos la anticipación suficiente para prepararla con amor.</p></div>
-    </div>
-    <div class="faq-item fade-up" id="faq-6">
-      <button class="faq-btn" onclick="toggleFaq('faq-6')">
-        ¿Los productos tienen conservantes o son caseros?
-        <span class="faq-arrow">+</span>
-      </button>
-      <div class="faq-body"><p>Todo es 100% artesanal y casero, sin conservantes industriales. Por eso saben tan bien y tienen esa textura que no encontrás en ninguna panadería comercial.</p></div>
-    </div>
+    <div class="faq-item fade-up" id="faq-1"><button class="faq-btn" onclick="toggleFaq('faq-1')">¿Cómo hago mi pedido?<span class="faq-arrow">+</span></button><div class="faq-body"><p>Lo más fácil es completar el formulario de encargos — se arma el mensaje automáticamente y se abre WhatsApp con todo listo. También podés escribirnos directo al +54 9 11 6321-1132.</p></div></div>
+    <div class="faq-item fade-up" id="faq-2"><button class="faq-btn" onclick="toggleFaq('faq-2')">¿Con cuánta anticipación tengo que encargar?<span class="faq-arrow">+</span></button><div class="faq-body"><p>Para tortas y encargos especiales necesitamos al menos 48 horas. Para eventos grandes, lo ideal es una semana antes.</p></div></div>
+    <div class="faq-item fade-up" id="faq-3"><button class="faq-btn" onclick="toggleFaq('faq-3')">¿Hacen envíos a domicilio?<span class="faq-arrow">+</span></button><div class="faq-body"><p>La entrega se coordina directamente con Dai por WhatsApp según la zona y el pedido. ¡Escribinos y lo vemos juntos!</p></div></div>
+    <div class="faq-item fade-up" id="faq-4"><button class="faq-btn" onclick="toggleFaq('faq-4')">¿Cómo pago mi pedido?<span class="faq-arrow">+</span></button><div class="faq-body"><p>Aceptamos transferencia bancaria y efectivo. Para encargos especiales generalmente pedimos una seña al confirmar.</p></div></div>
+    <div class="faq-item fade-up" id="faq-5"><button class="faq-btn" onclick="toggleFaq('faq-5')">¿Hacen tortas temáticas y candy bars?<span class="faq-arrow">+</span></button><div class="faq-body"><p>¡Sí! Tortas y candy bars con la temática que quieras: Spiderman, princesas, equipos de fútbol y más. Contanos tu idea y lo hacemos realidad.</p></div></div>
+    <div class="faq-item fade-up" id="faq-6"><button class="faq-btn" onclick="toggleFaq('faq-6')">¿Los productos son caseros y sin conservantes?<span class="faq-arrow">+</span></button><div class="faq-body"><p>Todo es 100% artesanal y casero, sin conservantes industriales. Por eso saben tan bien y tienen esa textura que no encontrás en ninguna pastelería comercial.</p></div></div>
   </div>
 </section>
 
-<!-- ─────────────────── FOOTER ─────────────────── -->
+<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
-      <h3>La Panadería de Dai</h3>
-      <p>Hecho con amor, de nuestra familia para vos. Artesanal, casero y argentino.</p>
+      <h3>Dai_eth</h3>
+      <p>Pastelería artesanal argentina. Hecho con amor, de nuestra familia para vos.</p>
       <div class="social-links">
         <a href="https://wa.me/5491163211132" target="_blank" class="social-link" title="WhatsApp">
-          <svg viewBox="0 0 24 24" fill="rgba(250,240,224,0.7)"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="rgba(250,240,224,0.75)"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
         </a>
         <a href="https://instagram.com/dai_eth" target="_blank" class="social-link" title="Instagram">
-          <svg viewBox="0 0 24 24" fill="rgba(250,240,224,0.7)"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          <svg viewBox="0 0 24 24" fill="rgba(250,240,224,0.75)"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
         </a>
       </div>
     </div>
@@ -903,42 +620,70 @@
     </div>
     <div class="footer-col">
       <h4>Contacto</h4>
-      <a href="https://wa.me/5491163211132" target="_blank">WhatsApp</a>
+      <a href="https://wa.me/5491163211132" target="_blank">+54 9 11 6321-1132</a>
       <a href="https://instagram.com/dai_eth" target="_blank">@dai_eth</a>
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2025 La Panadería de Dai · Hecho con amor 🧁</span>
+    <span>© 2025 Dai_eth · Pastelería Artesanal · Hecho con amor 🧁</span>
     <span>Argentina</span>
   </div>
 </footer>
 
-<!-- ─────────────────── JS ─────────────────── -->
 <script>
-  /* Menú mobile */
-  function toggleMenu() {
-    document.getElementById('mobileMenu').classList.toggle('open');
-  }
+function toggleMenu(){ document.getElementById('mobileMenu').classList.toggle('open') }
 
-  /* Acordeón catálogo */
-  function toggleAcc(id) {
-    const el = document.getElementById(id);
-    const isOpen = el.classList.contains('open');
-    document.querySelectorAll('.cat-accordion').forEach(a => a.classList.remove('open'));
-    if (!isOpen) el.classList.add('open');
-  }
+function toggleAcc(id){
+  const el=document.getElementById(id), open=el.classList.contains('open')
+  document.querySelectorAll('.cat-accordion').forEach(a=>a.classList.remove('open'))
+  if(!open) el.classList.add('open')
+}
 
-  /* FAQ */
-  function toggleFaq(id) {
-    const el = document.getElementById(id);
-    el.classList.toggle('open');
-  }
+function toggleFaq(id){ document.getElementById(id).classList.toggle('open') }
 
-  /* Animaciones de entrada con IntersectionObserver */
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+function limpiarError(fg){ document.getElementById(fg).classList.remove('error') }
+
+/* Formulario → WhatsApp con validación y mensaje automático */
+function enviarWpp(){
+  const campos=[
+    {id:'f-nombre',  fg:'fg-nombre'},
+    {id:'f-tel',     fg:'fg-tel'},
+    {id:'f-encargo', fg:'fg-encargo'},
+    {id:'f-fecha',   fg:'fg-fecha'},
+    {id:'f-detalles',fg:'fg-detalles'},
+  ]
+  let ok=true
+  campos.forEach(c=>{
+    const v=document.getElementById(c.id).value.trim()
+    document.getElementById(c.fg).classList.toggle('error',!v)
+    if(!v) ok=false
+  })
+  if(!ok) return
+
+  const nombre  = document.getElementById('f-nombre').value.trim()
+  const tel     = document.getElementById('f-tel').value.trim()
+  const encargo = document.getElementById('f-encargo').value.trim()
+  const rawFecha= document.getElementById('f-fecha').value      // YYYY-MM-DD
+  const detalles= document.getElementById('f-detalles').value.trim()
+
+  // Convertir a DD/MM/YYYY
+  const [yy,mm,dd]=rawFecha.split('-')
+  const fecha=`${dd}/${mm}/${yy}`
+
+  const msg=
+    `🧁 *Nuevo encargo — Dai_eth*\n\n`+
+    `*Nombre:* ${nombre}\n`+
+    `*WhatsApp/Teléfono:* ${tel}\n`+
+    `*Encargo:* ${encargo}\n`+
+    `*Fecha:* ${fecha}\n`+
+    `*Detalles:* ${detalles}`
+
+  window.open('https://wa.me/5491163211132?text='+encodeURIComponent(msg),'_blank')
+}
+
+/* Animaciones */
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:0.1})
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el))
 </script>
 </body>
 </html>
